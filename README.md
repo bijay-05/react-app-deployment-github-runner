@@ -21,3 +21,7 @@ This repository contains documentation and snippets regarding first task of the 
 > Although, the docker is installed, it shows `Docker installation failed`,  with not being the docker binary path on $PATH. For this, I added the Docker binary location on $PATH variable and exported $DOCKER_HOST variable. Finally, Docker installation was successful.
 
 ![Docker-Installation-Successful](images/docker-install-success.png)
+
+> Running the script second time, the installation process is skipped.
+
+![Skip-Docker-installation](images/skip-docker-installation.png)
