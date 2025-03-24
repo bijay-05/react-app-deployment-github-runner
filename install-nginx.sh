@@ -103,10 +103,10 @@ verify_config_restart() {
 }
 
 # Check if nginx exists
-which nginx > /dev/null 2>&1
+sudo which nginx > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     # Verify nginx is working or not
-    nginx -v > /dev/null 2>&1
+    sudo nginx -v > /dev/null 2>&1
     if [ $? -eq 0 ]; then  
         # Check service status
         systemctl status nginx > /dev/null 2>&1
@@ -137,7 +137,7 @@ else
     
     
     # Verify installation
-    nginx -v > /dev/null 2>&1
+    sudo nginx -v > /dev/null 2>&1
     if [ $? -eq 0 ] && [ "$(systemctl is-active nginx)" = "active" ]; then
         echo "Nginx installation completed successfully"
     else
