@@ -14,4 +14,10 @@ This repository contains documentation and snippets regarding first task of the 
 
 ![Docker-Install-Issue](images/docker-install-issue.png)
 
-> To resolve the issue, I installed the packages, depending upon the linux distribution of the host machine conditionally.
+> To resolve the issue, I installed the packages (within the script), depending upon the linux distribution of the host machine conditionally.
+
+![Docker-Installation-Intermediary-Stage](images/docker-install-intermediary-stage.png)
+
+> Although, the docker is installed, it shows `Docker installation failed`,  with not being the docker binary path on $PATH. For this, I added the Docker binary location on $PATH variable and exported $DOCKER_HOST variable. Finally, Docker installation was successful.
+
+![Docker-Installation-Successful](images/docker-install-success.png)
