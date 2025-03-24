@@ -36,3 +36,19 @@ I followed the ![Docker-Docs-on-Rootless-Installation](https://docs.docker.com/e
 - We have multiple functions to detect linux distribution, install nginx according to distribution.
 - Functions to configure nginx configuration and validate and restart nginx on the machine.
 - We invoke different functions by conditionally checking different scenarios for nginx installation and working on the linux machine.
+
+> I faced a slight issue while running the script. Although the nginx was installed, configured and started successfully, the script exited with error 1 code stating `Error: Nginx installation failed`.
+This was really not a installation and configuration issue, but caused due to under privileges of the initial command present in the script to check nginx version (at the end of the script for `verify installation`). This issue was resolved by adding `sudo` before the command to give enough privileges to view the version of nginx (to verify nginx was installed and started as expected).
+
+![Nginx-Installation-Failed-Issue](images/nginx-initial-issue.png)
+
+**Nginx-Installation-Success**
+
+![](images/nginx-install-success.png)
+
+![](images/nginx-home-page.png)
+
+
+**Nginx-Installation-script-second-run**
+
+![](images/nginx-already-installed-working.png)
