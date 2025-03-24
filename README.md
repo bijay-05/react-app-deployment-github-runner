@@ -10,3 +10,8 @@ This repository contains documentation and snippets regarding first task of the 
 - If installed, we will skip the installation. 
 - Due to security considerations, We will perform rootless installation of docker. This means that special privileges `sudo` are not required in order to run docker containers by the user installing the docker.
 
+> Issues faced: While installing rootless docker, certain packages were needed as pre-requisites in linux distribution that I tried running the script. For Debian based linux distributions, following packages were needed in advance. `uidmap` and `dbus-user-session`.
+
+![Docker-Install-Issue](images/docker-install-issue.png)
+
+> To resolve the issue, I installed the packages, depending upon the linux distribution of the host machine conditionally.

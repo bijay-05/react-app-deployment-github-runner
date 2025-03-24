@@ -11,6 +11,10 @@ if command_exists docker; then
     exit 0
 else
     echo "Installing Docker..."
+
+    if command_exists apt-get; then
+    sudo apt-get install uidmap dbus-user-session -y
+    fi
     
     # Download and execute rootless Docker installation script
     curl -fsSL https://get.docker.com/rootless -o get-docker.sh
