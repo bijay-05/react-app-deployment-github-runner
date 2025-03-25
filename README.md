@@ -52,3 +52,12 @@ This was really not a installation and configuration issue, but caused due to un
 **Nginx-Installation-script-second-run**
 
 ![](images/nginx-already-installed-working.png)
+
+## Dependency setup (CI)
+- Install Dependency for the project
+- Build Docker images
+- Push to Docker image to `DockerHub`
+
+I already have a **TODO Application** in React, Express and Postgresql. The source code for the application along with Dockerfiles are present inside the **app** directory.
+
+For Continuous Integration (CI) part, There is a **workflow.yml** file inside **.github/workflows** directory. 
