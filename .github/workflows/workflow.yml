@@ -1,0 +1,51 @@
+name: Build, push Docker image and deploy
+
+on:
+    push:
+        branches:
+            - dev
+            
+
+jobs:
+    build-and-push-image:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4.2.2
+              with:
+                fetch-depth: 2
+
+            - name: Detect changes
+              id: detect-changes
+              run: |
+                echo "::set-output name=FRONTEND_CHANGES::$(git diff --numstat HEAD~1 | grep -c '^.*app/frontend/')"
+                echo "::set-output name=BACKEND_CHANGES::$(git diff --numstat HEAD~1 | grep -c '^.*app/backend/')"
+
+            - name: Get Commit SHA
+              shell: bash
+              run: |
+                echo "SHA_SHORT=$(git rev-parse --short "$GITHUB_SHA")" >> "$GITHUB_ENV"
+
+            - name: Login to DockerHub
+              uses: docker/login-action@v2
+              with:
+                username: ${{ secrets.DOCKERHUB_USERNAME }}
+                password: ${{ secrets.DOCKERHUB_SECRET }}
+            
+            - name: Build and push to DockerHub
+              uses: docker/build-push-action@v6
+              if: steps.detect-changes.outcome.FRONTEND_CHANGES != '0'
+              with:
+                context: app/frontend/.
+                push: true
+                tags: ${{ env.DOCKERHUB }}/bijaypachhai/react-frontend:${{ env.SHA_SHORT }}
+                # tags: ${{ env.DOCKERHUB }}/bijaypachhai/react-frontend:${{ github.sha::5 }}
+
+            - name: Build and push to DockerHub
+              uses: docker/build-push-action@v6
+              if: steps.detect-changes.outcome.BACKEND_CHANGES != '0'
+              with:
+                context: app/backend/.
+                push: true
+                tags: ${{ env.DOCKERHUB }}/bijaypachhai/express-backend:${{ env.SHA_SHORT }}
