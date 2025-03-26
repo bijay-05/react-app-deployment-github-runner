@@ -44,4 +44,4 @@ jobs:
         - name: Deploy
           run: |
             echo "Successfully deployed"
-            # ssh -A -tt -i privatekey.pem -o StrictHostKeyChecking=no -p 22 <serveruser>@<serverIP> "cd app/ && bash deploy.sh"
+            ssh -A -tt -i ${{ secrets.SERVER_KEY }} -o StrictHostKeyChecking=no -p 22 adminuser@${{ secrets.SERVER_ADDRESS }} "cd app/ && bash deploy.sh --backend --backend-tag ${{ env.SHA_SHORT }}"
