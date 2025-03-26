@@ -60,4 +60,4 @@ This was really not a installation and configuration issue, but caused due to un
 
 I already have a **TODO Application** in React, Express and Postgresql. The source code for the application along with Dockerfiles are present inside the **app** directory.
 
-For Continuous Integration (CI) part, There is a **workflow.yml** file inside **.github/workflows** directory. 
+For Continuous Integration (CI) part, There are **frontend-workflow.yml** and **backend-workflow.yml** files inside **.github/workflows** directory. Each workflow does same thing, build the docker image, push to DockerHub and deploy new images on the server. But each one is only triggered when there are changes in respective sub-directories inside `app/` directory.
