@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY package.json yarn.lock ./
 
-RUN yarn --frozen-lockfile
+RUN yarn 
 
 FROM base AS build
 
