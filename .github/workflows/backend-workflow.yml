@@ -6,11 +6,7 @@ on:
             - main
         paths:
             - app/backend/**
-
-env:
-    SHA_SHORT: ${{ GITHUB_SHA::7 }}
             
-
 jobs:
     build-and-push-image:
         runs-on: ubuntu-latest
@@ -32,7 +28,13 @@ jobs:
               with:
                 context: app/backend/.
                 push: true
-                tags: bijaydockerhub/react-express-app:backend-$SHA_SHORT
+                tags: bijaydockerhub/react-express-app:backend-${{ GITHUB_SHA::7 }}
+            
+            - name: Artifact commit sha
+              run: |
+                echo "This: ${{ GITHUB_SHA::7 }}"
+                echo "${{ GITHUB_SHA::7 }}" > commit_sha.txt
+                cat commit_sha.txt
 
     deploy:
       runs-on: ubuntu-latest
