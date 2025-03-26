@@ -28,12 +28,12 @@ jobs:
               with:
                 context: app/backend/.
                 push: true
-                tags: bijaydockerhub/react-express-app:backend-${{ GITHUB_SHA::7 }}
+                tags: bijaydockerhub/react-express-app:backend-${GITHUB_SHA::7}
             
             - name: Artifact commit sha
               run: |
-                echo "This: ${{ GITHUB_SHA::7 }}"
-                echo "${{ GITHUB_SHA::7 }}" > commit_sha.txt
+                echo "This: ${GITHUB_SHA::7}"
+                echo "${GITHUB_SHA::7}" > commit_sha.txt
                 cat commit_sha.txt
 
     deploy:
