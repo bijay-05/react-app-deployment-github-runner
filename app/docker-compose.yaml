@@ -17,7 +17,7 @@ services:
 
   backend-prod:
     container_name: backend-container-prod
-    image: bijaydockerhub/react-express-app:backend-${BACKEND_TAG_SHORT}
+    image: bijaydockerhub/react-express-app:backend-${BACKEND_TAG}
     env_file:
       - ./backend/prod.env
     ports:
@@ -37,7 +37,7 @@ services:
 
   frontend-prod:
     container_name: frontend-container-prod
-    image: bijaydockerhub/react-express-app:frontend-${FRONTEND_TAG_SHORT}
+    image: bijaydockerhub/react-express-app:front-${FRONTEND_TAG}
     ports:
       - "5000:80"
     restart: always
