@@ -41,7 +41,7 @@ jobs:
               with:
                 context: app/backend/.
                 push: true
-                tags: bijaydockerhub/react-express-app:backend-${GITHUB_SHA::7}
+                tags: bijaydockerhub/react-express-app:backend-${{ env.SHA_SHORT }}
 
     deploy:
       runs-on: ubuntu-latest
