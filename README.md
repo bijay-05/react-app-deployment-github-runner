@@ -62,6 +62,8 @@ I already have a **TODO Application** in React, Express and Postgresql. The sour
 
 For Continuous Integration (CI) part, There are **frontend-workflow.yml** and **backend-workflow.yml** files inside **.github/workflows** directory. Each workflow does the same thing, build the docker image, push to DockerHub and deploy new images on the server. But each one is only triggered when there are changes in respective sub-directories inside `app/` directory.
 
+Due to limitations on free account of **DOCKERHUB**, I was able to get a single private repository. For this reason, I separated my frontend and backend docker images through use of tags in the pattern: `username/repository:front-<commit_SHA>` and `username/repository:backend-<commit_SHA>`.
+
 > Although it's possible to combine separate workflows into single workflow file, to build the docker image depending upon the changes in sub-directories of `app/` directory. Due to my other commitments, I could not optimise and decided to go with the simple solution for now.
 
 ## Deploy images (CD)
