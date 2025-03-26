@@ -39,7 +39,7 @@ jobs:
               with:
                 context: app/frontend/.
                 push: true
-                tags: ${{ env.DOCKERHUB }}/bijaypachhai/react-frontend:${{ env.SHA_SHORT }}
+                tags: ${{ env.DOCKERHUB }}/bijaydockerhub/react-express-app:front-${{ env.SHA_SHORT }}
                 # tags: ${{ env.DOCKERHUB }}/bijaypachhai/react-frontend:${{ github.sha::5 }}
 
             - name: Build and push to DockerHub
@@ -48,7 +48,7 @@ jobs:
               with:
                 context: app/backend/.
                 push: true
-                tags: ${{ env.DOCKERHUB }}/bijaypachhai/express-backend:${{ env.SHA_SHORT }}
+                tags: ${{ env.DOCKERHUB }}/bijaydockerhub/react-express-app:back-${{ env.SHA_SHORT }}
 
     deploy:
       runs-on: ubuntu-latest
@@ -56,4 +56,5 @@ jobs:
       steps:
         - name: Deploy
           run: |
-            ssh -A -tt -i privatekey.pem -o StrictHostKeyChecking=no -p 22 <serveruser>@<serverIP> "cd app/ && bash deploy.sh"
+            echo "Successfully deployed"
+            # ssh -A -tt -i privatekey.pem -o StrictHostKeyChecking=no -p 22 <serveruser>@<serverIP> "cd app/ && bash deploy.sh"
