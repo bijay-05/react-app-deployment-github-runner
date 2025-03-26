@@ -60,6 +60,5 @@ jobs:
             echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
             chmod 600 ~/.ssh/id_rsa
             echo "Successfully deployed"
-            echo "SHA_SHORT=$(cat commit_sha.txt)" >> "$GITHUB_ENV"
             echo "SHA short: $(cat commit_sha.txt)"
-            ssh -A -tt -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 adminuser@${{ secrets.SERVER_ADDRESS }} "cd app/ && bash deploy.sh --backend --backend-tag $SHA_SHORT"
+            ssh -A -tt -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 adminuser@${{ secrets.SERVER_ADDRESS }} "cd app/ && bash deploy.sh --backend --backend-tag $(cat commit_sha.txt)"
