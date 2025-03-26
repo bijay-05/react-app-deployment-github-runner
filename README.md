@@ -61,3 +61,28 @@ This was really not a installation and configuration issue, but caused due to un
 I already have a **TODO Application** in React, Express and Postgresql. The source code for the application along with Dockerfiles are present inside the **app** directory.
 
 For Continuous Integration (CI) part, There are **frontend-workflow.yml** and **backend-workflow.yml** files inside **.github/workflows** directory. Each workflow does same thing, build the docker image, push to DockerHub and deploy new images on the server. But each one is only triggered when there are changes in respective sub-directories inside `app/` directory.
+
+## Deploy images (CD)
+For deploying the application from within the workflow, I created a deploy job in each workflow file with steps to `SSH` into the server, and run a bash script that pulls latest docker images (the one which is build during the workflow) and uses `docker compose ` commands to deploy the application. The bash script `deploy.sh` and docker compose file `docker-compose.yaml` are available under `app/` directory.
+
+
+> I faced quite a long issue, while trying to add commit sha to docker image tag. The issue arised due to not being  able to pass environment variables between jobs, since each job runs on different process. Due to this issue, I was not able to deploy new docker images in the server. Finally, after long error and trial (**as seen through commit history**), I finally solved the issue with `actions/upload-artifact` and `actions/download-artifact` actions from Github.
+
+### Deploy Error
+
+![](images/assess-deploy-error.png)
+
+
+### Workflow Run Success
+
+![](images/assess-workflow-run-success.png)
+
+
+### Application containers on server
+
+![](images/assess-docker-compose-up-status.png)
+
+
+### Access application from browser
+
+![](images/assess-access-react-app-after-deploy.png)
