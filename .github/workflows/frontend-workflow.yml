@@ -41,6 +41,11 @@ jobs:
       needs: build-and-push-image
       steps:
         - name: Deploy
+          env:
+            SSH_PRIVATE_KEY: ${{ secrets.SERVER_KEY }}
           run: |
+            mkdir -p ~/.ssh
+            echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+            chmod 600 ~/.ssh/id_rsa
             echo "Successfully deployed"
-            ssh -A -tt -i ${{ secrets.SERVER_KEY }} -o StrictHostKeyChecking=no -p 22 adminuser@${{ secrets.SERVER_ADDRESS }} "cd app/ && bash deploy.sh --frontend --frontend-tag ${{ env.SHA_SHORT }}"
+            ssh -A -tt -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 adminuser@${{ secrets.SERVER_ADDRESS }} "cd app/ && bash deploy.sh --frontend --frontend-tag ${{ env.SHA_SHORT }}"
