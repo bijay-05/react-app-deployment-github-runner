@@ -45,7 +45,7 @@ const TodoFormAddPopup: React.FC<TodoFormAddPopupProps> = ({ showPopup, setShowP
             </div>
             <div className='mb-4'>
               <label htmlFor='description' className='block text-sm font-bold mb-2'>
-                description:
+                description-on:
               </label>
               <textarea
                 rows={5}
