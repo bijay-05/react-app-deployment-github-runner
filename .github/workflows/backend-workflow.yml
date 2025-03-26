@@ -48,4 +48,5 @@ jobs:
             echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
             chmod 600 ~/.ssh/id_rsa
             echo "Successfully deployed"
+            echo "SHA short: ${{env.SHA_SHORT}}"
             ssh -A -tt -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 adminuser@${{ secrets.SERVER_ADDRESS }} "cd app/ && bash deploy.sh --backend --backend-tag ${{ env.SHA_SHORT }}"
