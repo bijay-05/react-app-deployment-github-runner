@@ -73,7 +73,7 @@ if [[ "$DEPLOY_FRONTEND" -eq 1 ]]; then
 fi
 
 # Function to deploy services using Docker Compose
-docker-compose down && docker-compose up -d 
+docker compose down && docker compose up -d 
  
 
 # Clean up unused images
