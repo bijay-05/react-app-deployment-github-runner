@@ -35,7 +35,7 @@ const TodoUpdatePopup: React.FC<TodoUpdatePopupProps> = ({ showPopup, setShowPop
           <form onSubmit={handleUpdateTodo}>
             <div className='mb-4'>
               <label htmlFor='title' className='block text-sm font-bold mb-2'>
-                Title:
+                Titles:
               </label>
               <input
                 type='text'
