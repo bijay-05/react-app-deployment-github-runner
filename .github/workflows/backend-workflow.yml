@@ -34,14 +34,18 @@ jobs:
               with:
                 context: app/frontend/.
                 push: true
-                tags: bijaydockerhub/react-express-app:front-${{ env.SHA_SHORT }}
-                # tags: ${{ env.DOCKERHUB }}/bijaypachhai/react-frontend:${{ github.sha::5 }}
+                tags: bijaydockerhub/react-express-app:backend-${{ env.SHA_SHORT }}
 
     deploy:
       runs-on: ubuntu-latest
       needs: build-and-push-image
       steps:
         - name: Deploy
+          env:
+            SSH_PRIVATE_KEY: ${{ secrets.SERVER_KEY }}
           run: |
+            mkdir -p ~/.ssh
+            echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+            chmod 600 ~/.ssh/id_rsa
             echo "Successfully deployed"
-            ssh -A -tt -i ${{ secrets.SERVER_KEY }} -o StrictHostKeyChecking=no -p 22 adminuser@${{ secrets.SERVER_ADDRESS }} "cd app/ && bash deploy.sh --backend --backend-tag ${{ env.SHA_SHORT }}"
+            ssh -A -tt -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -p 22 adminuser@${{ secrets.SERVER_ADDRESS }} "cd app/ && bash deploy.sh --backend --backend-tag ${{ env.SHA_SHORT }}"
