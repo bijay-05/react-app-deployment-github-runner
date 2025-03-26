@@ -31,7 +31,7 @@ jobs:
               uses: docker/login-action@v2
               with:
                 username: ${{ secrets.DOCKERHUB_USERNAME }}
-                password: ${{ secrets.DOCKERHUB_SECRET }}
+                password: ${{ secrets.DOCKERHUB_PASSWORD }}
             
             - name: Build and push to DockerHub
               uses: docker/build-push-action@v6
@@ -39,7 +39,7 @@ jobs:
               with:
                 context: app/frontend/.
                 push: true
-                tags: ${{ env.DOCKERHUB }}/bijaydockerhub/react-express-app:front-${{ env.SHA_SHORT }}
+                tags: bijaydockerhub/react-express-app:front-${{ env.SHA_SHORT }}
                 # tags: ${{ env.DOCKERHUB }}/bijaypachhai/react-frontend:${{ github.sha::5 }}
 
             - name: Build and push to DockerHub
@@ -48,7 +48,7 @@ jobs:
               with:
                 context: app/backend/.
                 push: true
-                tags: ${{ env.DOCKERHUB }}/bijaydockerhub/react-express-app:back-${{ env.SHA_SHORT }}
+                tags: bijaydockerhub/react-express-app:back-${{ env.SHA_SHORT }}
 
     deploy:
       runs-on: ubuntu-latest
