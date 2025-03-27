@@ -20,6 +20,8 @@ This repository contains documentation and snippets regarding first task of the 
 
 > Although, the docker is installed, it shows `Docker installation failed`,  with not being the docker binary path on $PATH. For this, I added the Docker binary location on $PATH variable and exported $DOCKER_HOST variable. Finally, Docker installation was successful.
 
+> I have updated the `install-docker.sh` script to add the docker binary location to $PATH variable, and export the DOCKER_HOST variable. This part in not included in **PDF** document.
+
 ![Docker-Installation-Successful](images/docker-install-success.png)
 
 > Running the script second time, the installation process is skipped.
