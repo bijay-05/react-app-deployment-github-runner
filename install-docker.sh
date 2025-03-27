@@ -21,8 +21,10 @@ else
     bash get-docker.sh
 
     ## add post-installation Environment variables
-    printf "\nPATH=/home/$USER/bin:\$PATH" >> .bashrc
-    printf "\nDOCKER_HOST=unix:///run/user/$id/docker.sock" >> .bashrc 
+    printf "\nPATH=/home/$USER/bin:\$PATH" >> ~/.bashrc
+    printf "\nDOCKER_HOST=unix:///run/user/$id/docker.sock" >> ~/.bashrc 
+    printf "\nexport PATH" >> ~/.bashrc
+    printf "\nexport DOCKER_HOST" >> ~/.bashrc
     
     # Verify installation
     docker --version > /dev/null 2>&1
