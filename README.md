@@ -64,6 +64,11 @@ For Continuous Integration (CI) part, There are **frontend-workflow.yml** and **
 
 Due to limitations on free account of **DOCKERHUB**, I was able to get a single private repository. For this reason, I separated my frontend and backend docker images through use of tags in the pattern: `username/repository:front-<commit_SHA>` and `username/repository:backend-<commit_SHA>`.
 
+### Access Private Repository on DockerHub
+In order to access the private respository on DockerHub, I have provided DockerHub credentials to workflow environment through **Github Repository Secrets**
+
+![](images/repository-secrets.png)
+
 > Although it's possible to combine separate workflows into single workflow file, to build the docker image depending upon the changes in sub-directories of `app/` directory. Due to my other commitments, I could not optimise and decided to go with the simple solution for now.
 
 ## Deploy images (CD)
