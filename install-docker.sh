@@ -22,7 +22,7 @@ else
 
     ## add post-installation Environment variables
     printf "\nPATH=/home/$USER/bin:\$PATH" >> ~/.bashrc
-    printf "\nDOCKER_HOST=unix:///run/user/$id/docker.sock" >> ~/.bashrc 
+    printf "\nDOCKER_HOST=unix:///run/user/$(id -u $USER)/docker.sock" >> ~/.bashrc 
     printf "\nexport PATH" >> ~/.bashrc
     printf "\nexport DOCKER_HOST" >> ~/.bashrc
     source ~/.bashrc
