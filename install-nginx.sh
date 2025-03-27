@@ -62,6 +62,7 @@ http {
     keepalive_timeout 65;
     types_hash_max_size 2048;
 
+    include /etc/nginx/sites-available/*;
     include /etc/nginx/mime.types;
     default_type application/octet-stream;
 
