@@ -19,6 +19,10 @@ else
     # Download and execute rootless Docker installation script
     curl -fsSL https://get.docker.com/rootless -o get-docker.sh
     bash get-docker.sh
+
+    ## add post-installation Environment variables
+    printf "\nPATH=/home/$USER/bin:\$PATH" >> .bashrc
+    printf "\nDOCKER_HOST=unix:///run/user/$id/docker.sock" >> .bashrc 
     
     # Verify installation
     docker --version > /dev/null 2>&1
