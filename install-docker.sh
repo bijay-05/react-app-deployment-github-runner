@@ -25,6 +25,7 @@ else
     printf "\nDOCKER_HOST=unix:///run/user/$id/docker.sock" >> ~/.bashrc 
     printf "\nexport PATH" >> ~/.bashrc
     printf "\nexport DOCKER_HOST" >> ~/.bashrc
+    source ~/.bashrc
     
     # Verify installation
     docker --version > /dev/null 2>&1
