@@ -10,20 +10,24 @@ This repository contains documentation and snippets regarding first task of the 
 - If installed, we will skip the installation. 
 - Due to security considerations, We will perform rootless installation of docker. This means that special privileges `sudo` are not required in order to run docker containers by the user installing the docker.
 
+> [!Caution]
 > Issues faced: While installing rootless docker, certain packages were needed as pre-requisites in linux distribution that I tried running the script on. For Debian based linux distributions, following packages were needed in advance. `uidmap` and `dbus-user-session`.
 
 ![Docker-Install-Issue](images/docker-install-issue.png)
 
+> [!Important]
 > To resolve the issue, I installed the packages (within the script), depending upon the linux distribution of the host machine conditionally.
 
 ![Docker-Installation-Intermediary-Stage](images/docker-install-intermediary-stage.png)
 
+> [!Caution]
 > Although, the docker is installed, it shows `Docker installation failed`,  with not being the docker binary path on $PATH. For this, I added the Docker binary location on $PATH variable and exported $DOCKER_HOST variable. Finally, Docker installation was successful.
 
 > I have updated the `install-docker.sh` script to add the docker binary location to $PATH variable, and export the DOCKER_HOST variable. This part in not included in **PDF** document.
 
 ![Docker-Installation-Successful](images/docker-install-success.png)
 
+> [!Important]
 > Running the script second time, the installation process is skipped.
 
 ![Skip-Docker-installation](images/skip-docker-installation.png)
@@ -39,8 +43,11 @@ I followed the ![Docker-Docs-on-Rootless-Installation](https://docs.docker.com/e
 - Functions to configure nginx configuration and validate and restart nginx on the machine.
 - We invoke different functions by conditionally checking different scenarios for nginx installation and working on the linux machine.
 
-> I faced a slight issue while running the script. Although the nginx was installed, configured and started successfully, the script exited with error 1 code stating `Error: Nginx installation failed`.
-This was really not a installation and configuration issue, but caused due to under privileges of the initial command present in the script to check nginx version (at the end of the script for `verify installation`). This issue was resolved by adding `sudo` before the command to give enough privileges to view the version of nginx (to verify nginx was installed and started as expected).
+> [!Caution]
+> I faced a slight issue while running the script. Although the nginx was installed, configured and started successfully, the script exited with error 1 code stating **Error: Nginx installation failed**.
+
+> [!Important]
+> This was really not a installation and configuration issue, but caused due to under privileges of the initial command present in the script to check nginx version (at the end of the script for `verify installation`). This issue was resolved by adding `sudo` before the command to give enough privileges to view the version of nginx (to verify nginx was installed and started as expected).
 
 ![Nginx-Installation-Failed-Issue](images/nginx-initial-issue.png)
 
@@ -71,12 +78,13 @@ In order to access the private respository on DockerHub, I have provided DockerH
 
 ![](images/repository-secrets.png)
 
+> [!Important]
 > Although it's possible to combine separate workflows into single workflow file, to build the docker image depending upon the changes in sub-directories of `app/` directory. Due to my other commitments, I could not optimise and decided to go with the simple solution for now.
 
 ## Deploy images (CD)
 For deploying the application from within the workflow, I created a deploy job in each workflow file with steps to `SSH` into the server, and run a bash script that pulls latest docker images (the one which is build during the workflow) and uses `docker compose ` commands to deploy the application. The bash script `deploy.sh` and docker compose file `docker-compose.yaml` are available under `app/` directory.
 
-
+> [!Caution]
 > I faced quite a time consuming issue, while trying to add commit sha to docker image tag. The issue arised due to not being  able to pass environment variables between jobs, since each job runs on different process. Due to this issue, I was not able to deploy new docker images in the server. Finally, after long error and trial (**as seen through commit history**), I finally solved the issue with `actions/upload-artifact` and `actions/download-artifact` actions from Github.
 
 ### Deploy Error
